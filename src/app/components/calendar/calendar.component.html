@@ -1,0 +1,38 @@
+<div class="form-group row justify-content-center align-items-center">
+  <h1>Reservations</h1>
+  <div class="offset-1">
+    <input class="form-control" type="date" [value]="getCurrentDate()" id="example-date-input">
+  </div>
+</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Hours</th>
+    <th scope="col">Name</th>
+    <th scope="col">Telephone</th>
+    <th scope="col">Reservation type</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <th scope="row">8:00-10:00</th>
+    <td>Mark Otto</td>
+    <td>513215178</td>
+    <td>Flight</td>
+  </tr>
+  <tr>
+    <th scope="row">11:00-12:30</th>
+    <td>Jacob Thornton</td>
+    <td>123456789</td>
+    <td>Car drifting</td>
+  </tr>
+  <tr>
+    <th scope="row">15:00-23:00</th>
+    <td>Larry Jackson</td>
+    <td>987654321</td>
+    <td>Concert</td>
+  </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary float-right m-4" (click)="onClickAddNewReservation()">Add new reservation</button>
+<app-modal-dialog></app-modal-dialog>
