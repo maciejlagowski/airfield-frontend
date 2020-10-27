@@ -14,23 +14,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <th scope="row">8:00-10:00</th>
-    <td>Mark Otto</td>
-    <td>513215178</td>
-    <td>Flight</td>
-  </tr>
-  <tr>
-    <th scope="row">11:00-12:30</th>
-    <td>Jacob Thornton</td>
-    <td>123456789</td>
-    <td>Car drifting</td>
-  </tr>
-  <tr>
-    <th scope="row">15:00-23:00</th>
-    <td>Larry Jackson</td>
-    <td>987654321</td>
-    <td>Concert</td>
+  <tr *ngFor="let reservation of reservations">
+    <th scope="row">{{reservation.startDate}} - {{reservation.endDate}}</th>
+    <td>{{reservation.name}}</td>
+    <td>{{reservation.telephone}}</td>
+    <td>{{reservation.reservationType}}</td>
   </tr>
   </tbody>
 </table>
