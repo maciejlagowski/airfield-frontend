@@ -1,7 +1,7 @@
 <div class="form-group row justify-content-center align-items-center">
   <h1>Reservations</h1>
   <div class="offset-1">
-    <input class="form-control" type="date" [value]="getCurrentDate()" id="example-date-input">
+    <input class="form-control" type="date" [value]="getCurrentDate()" id="calendar-input">
   </div>
 </div>
 <table class="table">
@@ -15,12 +15,11 @@
   </thead>
   <tbody>
   <tr *ngFor="let reservation of reservations">
-    <th scope="row">{{reservation.startDate}} - {{reservation.endDate}}</th>
+    <th scope="row">{{reservation.startTime.substring(0, 5)}} - {{reservation.endTime.substring(0, 5)}}</th>
     <td>{{reservation.name}}</td>
     <td>{{reservation.telephone}}</td>
     <td>{{reservation.reservationType}}</td>
   </tr>
   </tbody>
 </table>
-<button type="button" class="btn btn-primary float-right m-4" (click)="onClickAddNewReservation()">Add new reservation</button>
-<app-modal-dialog></app-modal-dialog>
+<app-add-reservation-dialog [reservations]="reservations"></app-add-reservation-dialog>

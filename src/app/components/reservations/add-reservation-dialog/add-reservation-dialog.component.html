@@ -1,0 +1,67 @@
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <label>New user
+      <input type="checkbox" name="userType" [(ngModel)]="isNewUser"/>
+    </label>
+
+    <form (ngSubmit)="onSubmit()" #reservationForm="ngForm">
+      <div class="form-group">
+        <label for="startTime">startTime</label>
+        <input type="time"
+               class="form-control"
+               [(ngModel)]="reservation.startTime"
+               id="startTime"
+               name="startTime"
+               #startTime="ngModel"
+               placeholder="Enter start time"
+               required/>
+        <div *ngIf="startTime.pristine" class="alert alert-danger">Start time is required</div>
+      </div>
+      <div class="form-group">
+        <label for="endTime">endTime</label>
+        <input type="time"
+               class="form-control"
+               [(ngModel)]="reservation.endTime"
+               id="endTime"
+               name="endTime"
+               #endTime="ngModel"
+               placeholder="Enter end time"
+               required/>
+        <div *ngIf="endTime.pristine" class="alert alert-danger">End time is required</div>
+        <div *ngIf="getTimeDifference() < 0" class="alert alert-danger">End time cannot be earlier than start time</div>
+        <div *ngIf="getTimeDifference() < 30 && getTimeDifference() > 0" class="alert alert-danger">Time period cannot
+          be less than 30 minutes
+        </div>
+      </div>
+      <div class="form-group" *ngIf="isNewUser"> <!--TODO create new user-->
+        Create new user
+        <app-user-form></app-user-form>
+        fffffffffffffffffffffffffffffffff
+      </div>
+      <div class="form-group" *ngIf="!isNewUser"> <!--TODO select user from db-->
+        <app-user-list (userEvent)="setUser($event)"></app-user-list>
+        gggggggggggggggggggggggggggg
+      </div>
+      <button type="submit" [disabled]="!reservationForm.form.valid"
+              class="btn btn-info" (click)="onSubmit()">Submit
+      </button>
+    </form>
+
+    <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
+  </div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+
+<hr>
+
+<pre>{{ closeResult }}</pre>

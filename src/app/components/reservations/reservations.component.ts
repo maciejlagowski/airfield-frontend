@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {User} from '../../model/user';
-import {UserService} from '../../services/user.service';
+import {Component, OnInit} from '@angular/core';
 import {Reservation} from '../../model/reservation';
 import {ReservationService} from '../../services/reservation.service';
 
@@ -27,9 +25,5 @@ export class ReservationsComponent implements OnInit {
     const mm: string = String(date.getMonth() + 1).padStart(2, '0');
     const yyyy: string = String(date.getFullYear());
     return yyyy + '-' + mm + '-' + dd;
-  }
-
-  onClickAddNewReservation(): void {
-
   }
 }

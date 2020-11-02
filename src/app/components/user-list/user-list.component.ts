@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {User} from '../../model/user';
 
@@ -8,8 +8,9 @@ import {User} from '../../model/user';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-
   users: User[];
+  @Output()
+  userEvent = new EventEmitter<User>();
 
   constructor(private userService: UserService) { }
 
@@ -18,5 +19,7 @@ export class UserListComponent implements OnInit {
       this.users = data;
     });
   }
-
+  selectUser(user: User): void {
+    this.userEvent.emit(user);
+  }
 }
