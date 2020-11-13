@@ -1,11 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ReservationService} from '../../../services/reservation.service';
 import {Reservation} from '../../../model/reservation';
-import {Time} from '@angular/common';
-import {NgModel} from '@angular/forms';
 import {User} from '../../../model/user';
-import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
+import {ReservationType} from '../../../model/reservation-type.enum';
+import {Status} from '../../../model/status.enum';
 
 @Component({
   selector: 'app-add-reservation-dialog',
@@ -17,11 +16,18 @@ export class AddReservationDialogComponent implements OnInit {
   reservation: Reservation;
   @Input()
   reservations: Reservation[];
+  @Input()
+  date: string;
   isNewUser: boolean;
   user: User;
+  reservationTypes: string[] = Object.keys(ReservationType);
+  reservationType: ReservationType;
+  @Input()
+  loggedUser: User;
 
   constructor(private modalService: NgbModal, private reservationService: ReservationService) {
     this.reservation = new Reservation();
+    this.reservation.status = Status.NEW;
   }
 
   ngOnInit(): void {
@@ -46,21 +52,20 @@ export class AddReservationDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.isHoursConflictExists()) {
-      console.log('error conflict'); // TODO
-    } else {
-      this.reservationService.save(this.reservation).subscribe();
-    }
+    this.reservation.date = this.date;
+    this.reservation.reservationType = this.reservationType;
+    this.user = this.loggedUser;
+    this.reservation.userId = this.user.id;
+    console.log(this.user);
+    this.reservationService.save(this.reservation).subscribe();
   }
 
   isHoursConflictExists(): boolean {
     for (const reservation of this.reservations) {
       if (this.reservation.collides(reservation)) {
-        console.log('errorrrrrr');
         return true;
       }
     }
-    console.log('not eror?');
     return false;
   }
 
@@ -78,6 +83,5 @@ export class AddReservationDialogComponent implements OnInit {
 
   setUser(user: User): void {
     this.user = user;
-    this.reservation.userId = user.id;
   }
 }

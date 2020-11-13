@@ -1,6 +1,6 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {UserService} from '../../services/user.service';
-import {User} from '../../model/user';
+import {UserService} from '../../../services/user.service';
+import {User} from '../../../model/user';
 
 @Component({
   selector: 'app-user-list',
@@ -11,6 +11,7 @@ export class UserListComponent implements OnInit {
   users: User[];
   @Output()
   userEvent = new EventEmitter<User>();
+  searchText: string;
 
   constructor(private userService: UserService) { }
 

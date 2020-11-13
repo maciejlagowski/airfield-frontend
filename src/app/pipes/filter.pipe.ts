@@ -1,16 +1,20 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import {User} from '../model/user';
 
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-
-  transform(value, keys: string, term: string): unknown {
-    if (!term) {
-      return value;
+  transform(items: User[], searchText: string): any[] {
+    if (!items) {
+      return [];
     }
-    return (value || [])
-      .filter(item => keys.split(',')
-        .some(key => item.hasOwnProperty(key) && new RegExp(term, 'gi').test(item[key])));
+    if (!searchText) {
+      return items;
+    }
+    searchText = searchText.toLowerCase();
+    return items.filter(it => {
+      return it.name.toLowerCase().includes(searchText);
+    });
   }
 }

@@ -1,0 +1,3 @@
+export enum ReservationType {
+  FLIGHT = 'FLIGHT', CONCERT = 'CONCERT', MOTORSPORTS = 'MOTORSPORTS', OTHER = 'OTHER'
+}

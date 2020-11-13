@@ -1,19 +1,21 @@
 <div class="card my-5">
   <div class="card-body">
-    <input type="text" />
+     <label>Search for user
+    <input type="text" [(ngModel)]="searchText" />
+  </label>
     <table class="table table-bordered table-hover">
       <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
-        <th scope="col">Email</th>
+        <th scope="col">Telephone</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let user of users" (click)="selectUser(user)">
+      <tr *ngFor="let user of users | filter : searchText" (click)="selectUser(user)">
         <td>{{ user.id }}</td>
         <td>{{ user.name }}</td>
-        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+        <td><a href="tel:{{user.phone}}">{{user.phone}}</a></td>
       </tr>
       </tbody>
     </table>

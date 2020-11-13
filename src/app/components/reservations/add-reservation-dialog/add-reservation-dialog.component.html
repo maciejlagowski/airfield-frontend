@@ -1,10 +1,10 @@
 <ng-template #content let-modal>
   <div class="modal-body">
-    <label>New user
+    <label *ngIf="loggedUser.isEmployee">New user
       <input type="checkbox" name="userType" [(ngModel)]="isNewUser"/>
     </label>
 
-    <form (ngSubmit)="onSubmit()" #reservationForm="ngForm">
+    <form #reservationForm="ngForm">
       <div class="form-group">
         <label for="startTime">startTime</label>
         <input type="time"
@@ -29,25 +29,32 @@
                required/>
         <div *ngIf="endTime.pristine" class="alert alert-danger">End time is required</div>
         <div *ngIf="getTimeDifference() < 0" class="alert alert-danger">End time cannot be earlier than start time</div>
+        <div *ngIf="isHoursConflictExists()" class="alert alert-danger">Requested time is already reserved</div>
         <div *ngIf="getTimeDifference() < 30 && getTimeDifference() > 0" class="alert alert-danger">Time period cannot
           be less than 30 minutes
         </div>
       </div>
-      <div class="form-group" *ngIf="isNewUser"> <!--TODO create new user-->
+      <div class="form-group" *ngIf="isNewUser && loggedUser.isEmployee">
         Create new user
         <app-user-form></app-user-form>
-        fffffffffffffffffffffffffffffffff
       </div>
-      <div class="form-group" *ngIf="!isNewUser"> <!--TODO select user from db-->
+      <div class="form-group" *ngIf="!isNewUser && loggedUser.isEmployee">
         <app-user-list (userEvent)="setUser($event)"></app-user-list>
-        gggggggggggggggggggggggggggg
       </div>
-      <button type="submit" [disabled]="!reservationForm.form.valid"
-              class="btn btn-info" (click)="onSubmit()">Submit
+      <div class="form-group">
+        <label> Type of reservation
+          <select [(ngModel)]="reservationType" name="reservationType">
+            <option *ngFor="let type of reservationTypes" >{{type}}</option>
+          </select>
+        </label>
+      </div>
+      <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
+      <button type="submit"
+              [disabled]="!reservationForm.form.valid || isHoursConflictExists() || (getTimeDifference() < 30 && getTimeDifference() > 0) || (user === undefined && this.loggedUser.isEmployee)"
+              class="btn btn-info" (click)="onSubmit();modal.close('Save click')">Submit
       </button>
     </form>
 
-    <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
   </div>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
@@ -56,11 +63,11 @@
     </button>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    <!--    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>-->
   </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add reservation</button>
 
 <hr>
 
