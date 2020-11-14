@@ -58,6 +58,7 @@ export class AddReservationDialogComponent implements OnInit {
     this.reservation.userId = this.user.id;
     console.log(this.user);
     this.reservationService.save(this.reservation).subscribe();
+    javascript:window.location.reload();
   }
 
   isHoursConflictExists(): boolean {

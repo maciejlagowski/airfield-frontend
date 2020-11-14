@@ -3,7 +3,6 @@ import {Reservation} from '../../model/reservation';
 import {ReservationService} from '../../services/reservation.service';
 import {User} from '../../model/user';
 import {Status} from '../../model/status.enum';
-import {newArray} from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-reservations',
@@ -17,7 +16,8 @@ export class ReservationsComponent implements OnInit {
   @Input()
   loggedUser: User;
 
-  constructor(private reservationService: ReservationService) { }
+  constructor(private reservationService: ReservationService) {
+  }
 
   ngOnInit(): void {
     this.date = this.getCurrentDate();

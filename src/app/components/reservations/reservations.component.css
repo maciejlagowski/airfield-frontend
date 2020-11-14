@@ -1,0 +1,6 @@
+.NEW {
+  background: limegreen;
+}
+.REJECTED, .CANCELLED {
+  background: lightgray;
+}

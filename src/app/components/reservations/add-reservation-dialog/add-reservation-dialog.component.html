@@ -30,7 +30,7 @@
         <div *ngIf="endTime.pristine" class="alert alert-danger">End time is required</div>
         <div *ngIf="getTimeDifference() < 0" class="alert alert-danger">End time cannot be earlier than start time</div>
         <div *ngIf="isHoursConflictExists()" class="alert alert-danger">Requested time is already reserved</div>
-        <div *ngIf="getTimeDifference() < 30 && getTimeDifference() > 0" class="alert alert-danger">Time period cannot
+        <div *ngIf="getTimeDifference() < 30 && getTimeDifference() >= 0" class="alert alert-danger">Time period cannot
           be less than 30 minutes
         </div>
       </div>
@@ -44,13 +44,15 @@
       <div class="form-group">
         <label> Type of reservation
           <select [(ngModel)]="reservationType" name="reservationType">
-            <option *ngFor="let type of reservationTypes" >{{type}}</option>
+            <option *ngFor="let type of reservationTypes">{{type}}</option>
           </select>
         </label>
       </div>
       <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
       <button type="submit"
-              [disabled]="!reservationForm.form.valid || isHoursConflictExists() || (getTimeDifference() < 30 && getTimeDifference() > 0) || (user === undefined && this.loggedUser.isEmployee)"
+              [disabled]="!reservationForm.form.valid || isHoursConflictExists() ||
+               (getTimeDifference() < 30 && getTimeDifference() > 0) ||
+               (user === undefined && this.loggedUser.isEmployee)"
               class="btn btn-info" (click)="onSubmit();modal.close('Save click')">Submit
       </button>
     </form>

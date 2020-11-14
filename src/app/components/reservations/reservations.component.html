@@ -11,11 +11,11 @@
     <th scope="col">Name</th>
     <th scope="col">Telephone</th>
     <th scope="col">Reservation type</th>
-    <th scope="col" *ngIf="loggedUser.isEmployee">Status</th>
+    <th scope="col">Status</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let reservation of this.reservations"> <!-- TODO pipe filter -->
+  <tr *ngFor="let reservation of this.reservations" class="{{reservation.status}}">
     <th scope="row">{{reservation.startTime.substring(0, 5)}} - {{reservation.endTime.substring(0, 5)}}</th>
     <td><p *ngIf="loggedUser.isEmployee">{{reservation.name}}</p>
       <p *ngIf="!loggedUser.isEmployee">********</p></td>
@@ -23,8 +23,9 @@
       href="tel:{{reservation.telephone}}">{{getPhoneNumberWithDashes(reservation.telephone)}}</a></p>
       <p *ngIf="!loggedUser.isEmployee">********</p></td>
     <td>{{reservation.reservationType}}</td>
-    <td *ngIf="loggedUser.isEmployee">x {{reservation.status}} x</td>
+    <td>{{reservation.status}}</td>
   </tr>
   </tbody>
 </table>
-<app-add-reservation-dialog [reservations]="reservations" [date]="date" [loggedUser]="loggedUser"></app-add-reservation-dialog>
+<app-add-reservation-dialog [reservations]="reservations" [date]="date"
+                            [loggedUser]="loggedUser"></app-add-reservation-dialog>
