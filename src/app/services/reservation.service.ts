@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from '../model/user';
 import {Reservation} from '../model/reservation';
+import {Status} from '../model/status.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,10 @@ export class ReservationService {
 
   public save(reservation: Reservation): Observable<Reservation> {
     return this.http.post<Reservation>(this.reservationsUrl, reservation);
+  }
+
+  public updateStatus(id: string, status: Status): Observable<Reservation> {
+    const params: HttpParams = new HttpParams().set('id', id).set('status', status);
+    return this.http.patch<Reservation>(this.reservationsUrl, {}, {params});
   }
 }

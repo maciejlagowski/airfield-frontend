@@ -1,0 +1,6 @@
+<p>detail-reservation-dialog works!</p>
+{{reservation.reservationType}}
+<button (click)="acceptReservation();" *ngIf="reservation.status === 'NEW'">ACCEPT</button>
+<button (click)="rejectReservation();" *ngIf="reservation.status === 'NEW'">REJECT</button>
+
+

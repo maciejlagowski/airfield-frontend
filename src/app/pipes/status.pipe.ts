@@ -11,7 +11,7 @@ export class StatusPipe implements PipeTransform {
       return [];
     }
     return items.filter(it => {
-      return it.status === Status.DONE || it.status === Status.ACCEPTED;
+      return (it.status !== Status.CANCELLED) && (it.status !== Status.REJECTED);
     });
   }
 }

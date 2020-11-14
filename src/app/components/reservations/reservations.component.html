@@ -1,7 +1,8 @@
 <div class="form-group row justify-content-center align-items-center">
   <h1>Reservations</h1>
   <div class="offset-1">
-    <input class="form-control" type="date" id="calendar-input" [(ngModel)]="date" (change)="updateReservations()"/>
+    <label><input (change)="updateReservations()" [(ngModel)]="date" class="form-control" id="calendar-input"
+                  type="date"/></label>
   </div>
 </div>
 <table class="table table-hover">
@@ -14,8 +15,8 @@
     <th scope="col">Status</th>
   </tr>
   </thead>
-  <tbody>
-  <tr *ngFor="let reservation of this.reservations" class="{{reservation.status}}">
+  <tbody> <!-- TODO anonimize by spring security -->
+  <tr (click)="openDetails(reservation)" *ngFor="let reservation of this.reservations" class="{{reservation.status}}">
     <th scope="row">{{reservation.startTime.substring(0, 5)}} - {{reservation.endTime.substring(0, 5)}}</th>
     <td><p *ngIf="loggedUser.isEmployee">{{reservation.name}}</p>
       <p *ngIf="!loggedUser.isEmployee">********</p></td>

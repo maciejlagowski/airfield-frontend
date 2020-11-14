@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ReservationService} from '../../../services/reservation.service';
 import {Reservation} from '../../../model/reservation';
 import {User} from '../../../model/user';
@@ -34,21 +34,7 @@ export class AddReservationDialogComponent implements OnInit {
   }
 
   open(content): void {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
   onSubmit(): void {
@@ -56,9 +42,8 @@ export class AddReservationDialogComponent implements OnInit {
     this.reservation.reservationType = this.reservationType;
     this.user = this.loggedUser;
     this.reservation.userId = this.user.id;
-    console.log(this.user);
     this.reservationService.save(this.reservation).subscribe();
-    javascript:window.location.reload();
+    location.reload();
   }
 
   isHoursConflictExists(): boolean {

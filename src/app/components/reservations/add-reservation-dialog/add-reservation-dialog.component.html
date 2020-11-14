@@ -1,38 +1,33 @@
 <ng-template #content let-modal>
   <div class="modal-body">
-    <label *ngIf="loggedUser.isEmployee">New user
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <button (click)="modal.dismiss()" aria-label="Close" class="close" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <label *ngIf="loggedUser.isEmployee">New user  <!-- TODO some another way? -->
       <input type="checkbox" name="userType" [(ngModel)]="isNewUser"/>
     </label>
 
     <form #reservationForm="ngForm">
       <div class="form-group">
-        <label for="startTime">startTime</label>
-        <input type="time"
-               class="form-control"
-               [(ngModel)]="reservation.startTime"
-               id="startTime"
+        <label for="startTime">Start Time</label>
+        <input #startTime="ngModel" [(ngModel)]="reservation.startTime" class="form-control" id="startTime"
                name="startTime"
-               #startTime="ngModel"
-               placeholder="Enter start time"
-               required/>
+               placeholder="Enter start time" required type="time"/>
         <div *ngIf="startTime.pristine" class="alert alert-danger">Start time is required</div>
       </div>
       <div class="form-group">
-        <label for="endTime">endTime</label>
-        <input type="time"
-               class="form-control"
-               [(ngModel)]="reservation.endTime"
-               id="endTime"
-               name="endTime"
-               #endTime="ngModel"
-               placeholder="Enter end time"
-               required/>
+        <label for="endTime">End Time</label>
+        <input #endTime="ngModel" [(ngModel)]="reservation.endTime" class="form-control" id="endTime" name="endTime"
+               placeholder="Enter end time" required type="time"/>
         <div *ngIf="endTime.pristine" class="alert alert-danger">End time is required</div>
-        <div *ngIf="getTimeDifference() < 0" class="alert alert-danger">End time cannot be earlier than start time</div>
-        <div *ngIf="isHoursConflictExists()" class="alert alert-danger">Requested time is already reserved</div>
-        <div *ngIf="getTimeDifference() < 30 && getTimeDifference() >= 0" class="alert alert-danger">Time period cannot
-          be less than 30 minutes
-        </div>
+      </div>
+      <div *ngIf="getTimeDifference() < 0" class="alert alert-danger">End time cannot be earlier than start time</div>
+      <div *ngIf="isHoursConflictExists()" class="alert alert-danger">Requested time is already reserved</div>
+      <div *ngIf="getTimeDifference() < 30 && getTimeDifference() >= 0" class="alert alert-danger">Time period cannot be
+        less than 30 minutes
       </div>
       <div class="form-group" *ngIf="isNewUser && loggedUser.isEmployee">
         Create new user
@@ -41,6 +36,8 @@
       <div class="form-group" *ngIf="!isNewUser && loggedUser.isEmployee">
         <app-user-list (userEvent)="setUser($event)"></app-user-list>
       </div>
+      <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
+      <div *ngIf="user === undefined && loggedUser.isEmployee" class="alert alert-danger">You must choose user</div>
       <div class="form-group">
         <label> Type of reservation
           <select [(ngModel)]="reservationType" name="reservationType">
@@ -48,29 +45,16 @@
           </select>
         </label>
       </div>
-      <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
+      <div *ngIf="reservationType === undefined" class="alert alert-danger">You must choose type of reservation</div>
       <button type="submit"
               [disabled]="!reservationForm.form.valid || isHoursConflictExists() ||
                (getTimeDifference() < 30 && getTimeDifference() > 0) ||
-               (user === undefined && this.loggedUser.isEmployee)"
+               (user === undefined && this.loggedUser.isEmployee) ||
+               (reservationType === undefined)"
               class="btn btn-info" (click)="onSubmit();modal.close('Save click')">Submit
       </button>
     </form>
-
-  </div>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-footer">
-    <!--    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>-->
   </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add reservation</button>
-
-<hr>
-
-<pre>{{ closeResult }}</pre>
+<button (click)="open(content)" class="btn btn-lg btn-outline-primary mr-5 mt-1 float-right">Add reservation</button>

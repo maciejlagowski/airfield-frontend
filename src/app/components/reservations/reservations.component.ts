@@ -2,7 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Reservation} from '../../model/reservation';
 import {ReservationService} from '../../services/reservation.service';
 import {User} from '../../model/user';
-import {Status} from '../../model/status.enum';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DetailReservationDialogComponent} from './detail-reservation-dialog/detail-reservation-dialog.component';
 
 @Component({
   selector: 'app-reservations',
@@ -16,7 +17,7 @@ export class ReservationsComponent implements OnInit {
   @Input()
   loggedUser: User;
 
-  constructor(private reservationService: ReservationService) {
+  constructor(private reservationService: ReservationService, private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -43,5 +44,11 @@ export class ReservationsComponent implements OnInit {
     const sliced2: string = phoneNumber.slice(3, 6);
     const sliced3: string = phoneNumber.slice(6, 9);
     return sliced1 + '-' + sliced2 + '-' + sliced3;
+  }
+
+  openDetails(reservation: Reservation): void {
+    // TODO user/employee verification
+    const detailDialog = this.modalService.open(DetailReservationDialogComponent);
+    detailDialog.componentInstance.reservation = reservation;
   }
 }
