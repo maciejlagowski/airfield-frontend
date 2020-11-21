@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ReservationService} from '../../../services/reservation.service';
-import {Reservation} from '../../../model/reservation';
-import {User} from '../../../model/user';
-import {ReservationType} from '../../../model/reservation-type.enum';
-import {Status} from '../../../model/status.enum';
+import {Reservation} from '../../../model/dto/reservation';
+import {User} from '../../../model/dto/user';
+import {ReservationType} from '../../../model/enum/reservation-type.enum';
+import {Status} from '../../../model/enum/status.enum';
 
 @Component({
   selector: 'app-add-reservation-dialog',

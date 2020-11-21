@@ -1,0 +1,58 @@
+<!--<p>weather works!</p>-->
+<!--{{weather.clouds}}<br />-->
+<!--{{weather.dateTime}}<br />-->
+<!--{{weather.dayTemp}}<br />-->
+<!--{{weather.mainWeather}}-->
+<!--{{weather.descriptionWeather}}-->
+<div *ngIf="weatherLoaded | async" class="m-4">
+  <h1>Weather</h1> <label>
+  <input (change)="updateWeather()" [(ngModel)]="date" type="date"/>
+</label> <br/><br/>
+  <img alt="Main weather" height="32" src="assets/img/cloud.svg" width="32"/>
+  {{weather.descriptionWeather}} <br/>
+  <img alt="Sunrise" height="32" src="assets/img/sun.svg" width="32"/>
+  {{weather.sunrise.substring(11, 16)}} <br/>
+  <img alt="Sunset" height="32" src="assets/img/moon.svg" width="32"/>
+  {{weather.sunset.substring(11, 16)}} <br/>
+  <app-weather-widget></app-weather-widget>
+
+  <br/><br/>
+  <h3>Detailed weather:</h3>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Morning</th>
+      <th scope="col">Day</th>
+      <th scope="col">Evening</th>
+      <th scope="col">Night</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">Temperature</th>
+      <td>{{ weather.morningTemp }} </td>
+      <td>{{ weather.dayTemp }} </td>
+      <td>{{ weather.eveningTemp }} </td>
+      <td>{{ weather.nightTemp }} </td>
+    </tr>
+    <tr>
+      <th scope="row">Temperature feels like</th>
+      <td>{{ weather.feelsLikeMorningTemp }} </td>
+      <td>{{ weather.feelsLikeDayTemp }} </td>
+      <td>{{ weather.feelsLikeEveningTemp }} </td>
+      <td>{{ weather.feelsLikeNightTemp }} </td>
+    </tr>
+    </tbody>
+  </table>
+
+  Minimal temperature {{ weather.minTemp }} <br/>
+  Maximal temperature {{ weather.maxTemp }} <br/>
+  Pressure {{ weather.pressure }} hPa <br/>
+  Humidity {{ weather.humidity }} <br/>
+  Wind speed {{ weather.windSpeed }} <br/>
+  Wind degree {{ weather.windDeg }} <br/>
+  Clouds {{ weather.clouds }} <br/>
+  Pop {{ weather.pop }} <br/>
+
+</div>

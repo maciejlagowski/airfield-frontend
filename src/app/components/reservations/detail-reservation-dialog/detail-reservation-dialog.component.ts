@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Reservation} from '../../../model/reservation';
+import {Reservation} from '../../../model/dto/reservation';
 import {ReservationService} from '../../../services/reservation.service';
-import {Status} from '../../../model/status.enum';
+import {Status} from '../../../model/enum/status.enum';
 
 @Component({
   selector: 'app-detail-reservation-dialog',

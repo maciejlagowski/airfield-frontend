@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {User} from '../../model/user';
-import {log} from 'util';
+import {User} from '../../model/dto/user';
 
 @Component({
   selector: 'app-login',

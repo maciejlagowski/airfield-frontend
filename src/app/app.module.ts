@@ -15,8 +15,10 @@ import {AddReservationDialogComponent} from './components/reservations/add-reser
 import {FilterPipe} from './pipes/filter.pipe';
 import {LoginComponent} from './components/login/login.component';
 import {StatusPipe} from './pipes/status.pipe';
-import {Location} from '@angular/common';
+import {CommonModule, Location} from '@angular/common';
 import {DetailReservationDialogComponent} from './components/reservations/detail-reservation-dialog/detail-reservation-dialog.component';
+import {WeatherComponent} from './components/weather/weather.component';
+import {WeatherWidgetComponent} from './components/weather/weather-widget/weather-widget.component';
 
 @NgModule({
   declarations: [
@@ -30,13 +32,16 @@ import {DetailReservationDialogComponent} from './components/reservations/detail
     FilterPipe,
     LoginComponent,
     StatusPipe,
-    DetailReservationDialogComponent
+    DetailReservationDialogComponent,
+    WeatherComponent,
+    WeatherWidgetComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   providers: [UserService, Location],
   bootstrap: [AppComponent]

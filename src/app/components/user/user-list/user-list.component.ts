@@ -1,6 +1,6 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {UserService} from '../../../services/user.service';
-import {User} from '../../../model/user';
+import {User} from '../../../model/dto/user';
 
 @Component({
   selector: 'app-user-list',

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Reservation} from '../model/reservation';
-import {Status} from '../model/status.enum';
+import {Reservation} from '../model/dto/reservation';
+import {Status} from '../model/enum/status.enum';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
-import {ReservationType} from './reservation-type.enum';
-import {Status} from './status.enum';
+import {ReservationType} from '../enum/reservation-type.enum';
+import {Status} from '../enum/status.enum';
 
 export class Reservation {
   date: string;
