@@ -1,12 +1,7 @@
-<!--<p>weather works!</p>-->
-<!--{{weather.clouds}}<br />-->
-<!--{{weather.dateTime}}<br />-->
-<!--{{weather.dayTemp}}<br />-->
-<!--{{weather.mainWeather}}-->
-<!--{{weather.descriptionWeather}}-->
 <div *ngIf="weatherLoaded | async" class="m-4">
   <h1>Weather</h1> <label>
   <input (change)="updateWeather()" [(ngModel)]="date" type="date"/>
+  <p [hidden]="!error" class="alert-danger">Cannot get weather on that day</p> <!-- TODO -->
 </label> <br/><br/>
   <img alt="Main weather" height="32" src="assets/img/cloud.svg" width="32"/>
   {{weather.descriptionWeather}} <br/>

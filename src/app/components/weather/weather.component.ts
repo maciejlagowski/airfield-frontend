@@ -4,7 +4,7 @@ import {Weather} from '../../model/dto/weather';
 import {StaticToolsService} from '../../services/static-tools.service';
 import {catchError} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-weather',
@@ -16,6 +16,7 @@ export class WeatherComponent implements OnInit {
   weather: Weather;
   weatherLoaded: Promise<boolean>;
   date: string;
+  error = false;
 
   constructor(private weatherService: WeatherService) {
     this.date = StaticToolsService.getCurrentDate();
@@ -31,12 +32,12 @@ export class WeatherComponent implements OnInit {
       .subscribe(data => {
         this.weather = data;
         this.weatherLoaded = Promise.resolve(true);
+        this.error = false;
       });
   }
 
   handleError(error: HttpErrorResponse): Observable<any> {
-    console.log('Error'); // TODO
-    return throwError(error);
+    this.error = true;
+    return new Observable<Weather>();
   }
-
 }
