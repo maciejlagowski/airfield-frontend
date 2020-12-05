@@ -3,8 +3,8 @@ import {User} from '../model/dto/user';
 import {HttpClient} from '@angular/common/http';
 import {Jwt} from '../model/dto/jwt';
 import {Role} from '../model/enum/role.enum';
-import {ErrorService} from './error.service';
-import {ErrorEnum} from '../model/enum/error.enum';
+import {NotificationService} from './notification.service';
+import {NotificationEnum} from '../model/enum/notification.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class JwtService {
 
   private readonly loginUrl = 'http://localhost:8080/login';
 
-  constructor(private http: HttpClient, private errorService: ErrorService) {
+  constructor(private http: HttpClient, private notificationService: NotificationService) {
   }
 
   login(user: User): void {
@@ -22,14 +22,14 @@ export class JwtService {
       localStorage.setItem('JWT_EXP_TIME', data.expirationTime);
       localStorage.setItem('USER_ROLE', data.role);
     });
-    this.errorService.removeError(ErrorEnum.NOT_LOGGED);
+    this.notificationService.removeNotification(NotificationEnum.NOT_LOGGED_ERROR);
   }
 
   logout(): void {
     localStorage.removeItem('LOGIN_TOKEN');
     localStorage.removeItem('JWT_EXP_TIME');
     localStorage.setItem('USER_ROLE', Role.ROLE_NOT_LOGGED);
-    this.errorService.addError(ErrorEnum.NOT_LOGGED, 'User not logged in, please log in or register');
+    this.notificationService.addNotification(NotificationEnum.NOT_LOGGED_ERROR, 'User not logged in, please log in or register');
   }
 
   getUserRoleLogged(): Role {

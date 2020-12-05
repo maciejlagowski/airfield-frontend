@@ -1,0 +1,6 @@
+<div *ngFor="let notification of getNotifications()" class="alert alert-dismissible {{getAlertType(notification[0])}}">
+  {{ notification[1] }}
+  <button (click)="removeNotification(notification[0])" aria-label="Close" class="close" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

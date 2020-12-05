@@ -21,6 +21,7 @@ import {WeatherWidgetComponent} from './components/weather/weather-widget/weathe
 import {JwtInterceptor} from './interceptors/token-interceptor.service';
 import {UserSettingsComponent} from './components/user/user-settings/user-settings.component';
 import {ErrorHandlerInterceptor} from './interceptors/error-handler.interceptor';
+import {NotificationsComponent} from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {ErrorHandlerInterceptor} from './interceptors/error-handler.interceptor'
     DetailReservationDialogComponent,
     WeatherComponent,
     WeatherWidgetComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
