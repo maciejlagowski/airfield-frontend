@@ -8,16 +8,21 @@
       <app-headbar></app-headbar>
 
       <div class="col-12 p-5">
+        <div *ngFor="let error of getErrors()" class="alert alert-danger alert-dismissible">
+          {{ error[1] }}
+          <button (click)="removeError(error[0])" aria-label="Close" class="close" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <br/>
         <div class="modal-content">
           <router-outlet></router-outlet>
           <br/>
           <div class="modal-content">
-            <!--          <app-weather class="m-5"></app-weather>-->
-            <!--          <app-reservations [loggedUser]="getUser(false)"></app-reservations>-->
-            <!--          <app-reservations [loggedUser]="getUser(true)"></app-reservations>-->
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+

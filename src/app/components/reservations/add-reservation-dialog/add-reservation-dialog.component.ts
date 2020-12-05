@@ -22,8 +22,6 @@ export class AddReservationDialogComponent implements OnInit {
   user: User;
   reservationTypes: string[] = Object.keys(ReservationType);
   reservationType: ReservationType;
-  @Input()
-  loggedUser: User;
 
   constructor(private modalService: NgbModal, private reservationService: ReservationService) {
     this.reservation = new Reservation();
@@ -40,7 +38,7 @@ export class AddReservationDialogComponent implements OnInit {
   onSubmit(): void {
     this.reservation.date = this.date;
     this.reservation.reservationType = this.reservationType;
-    this.user = this.loggedUser;
+    // this.user = this.loggedUser; TODO logged user automatically gets his reservation
     this.reservation.userId = this.user.id;
     this.reservationService.save(this.reservation).subscribe();
     location.reload();

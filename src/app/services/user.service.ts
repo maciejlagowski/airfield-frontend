@@ -21,19 +21,4 @@ export class UserService {
   public save(user: User): Observable<User> {
     return this.http.post<User>(this.usersUrl, user);
   }
-
-  public login(user: User): Observable<boolean> {
-    return null;
-    // const params: HttpParams = new HttpParams().set('user', JSON.stringify(user));
-    // this.http.get<boolean>(this.usersUrl, {params}).subscribe(isValid => {
-    //   if (isValid) {
-    //     sessionStorage.setItem('token',
-    //       btoa(this.user.name + ':'
-    //         + this.user.password));
-    //     this.router.navigate(['']);
-    //   } else {
-    //     alert('Authentication failed.');
-    //   }
-    // });
-  }
 }

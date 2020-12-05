@@ -15,18 +15,14 @@
     <th scope="col">Status</th>
   </tr>
   </thead>
-  <tbody> <!-- TODO anonimize by spring security -->
+  <tbody>
   <tr (click)="openDetails(reservation)" *ngFor="let reservation of this.reservations" class="{{reservation.status}}">
     <th scope="row">{{reservation.startTime.substring(0, 5)}} - {{reservation.endTime.substring(0, 5)}}</th>
-    <td><p *ngIf="loggedUser.isEmployee">{{reservation.name}}</p>
-      <p *ngIf="!loggedUser.isEmployee">********</p></td>
-    <td><p *ngIf="loggedUser.isEmployee"><a
-      href="tel:{{reservation.telephone}}">{{getPhoneNumberWithDashes(reservation.telephone)}}</a></p>
-      <p *ngIf="!loggedUser.isEmployee">********</p></td>
-    <td>{{reservation.reservationType}}</td>
-    <td>{{reservation.status}}</td>
+    <td>{{reservation.name}}</td>
+    <td><a href="tel:{{reservation.telephone}}">{{getPhoneNumberWithDashes(reservation.telephone)}}</a></td>
+    <td>{{reservation.reservationType | titlecase}}</td>
+    <td>{{reservation.status | titlecase}}</td>
   </tr>
   </tbody>
 </table>
-<app-add-reservation-dialog [reservations]="reservations" [date]="date"
-                            [loggedUser]="loggedUser"></app-add-reservation-dialog>
+<app-add-reservation-dialog [date]="date" [reservations]="reservations"></app-add-reservation-dialog>

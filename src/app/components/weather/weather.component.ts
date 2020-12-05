@@ -5,6 +5,8 @@ import {StaticToolsService} from '../../services/static-tools.service';
 import {catchError} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {ErrorService} from '../../services/error.service';
+import {ErrorEnum} from '../../model/enum/error.enum';
 
 @Component({
   selector: 'app-weather',
@@ -16,9 +18,8 @@ export class WeatherComponent implements OnInit {
   weather: Weather;
   weatherLoaded: Promise<boolean>;
   date: string;
-  error = false;
 
-  constructor(private weatherService: WeatherService) {
+  constructor(private weatherService: WeatherService, private errorService: ErrorService) {
     this.date = StaticToolsService.getCurrentDate();
   }
 
@@ -32,12 +33,11 @@ export class WeatherComponent implements OnInit {
       .subscribe(data => {
         this.weather = data;
         this.weatherLoaded = Promise.resolve(true);
-        this.error = false;
+        this.errorService.removeError(ErrorEnum.SERVER_ERROR);
       });
   }
 
   handleError(error: HttpErrorResponse): Observable<any> {
-    this.error = true;
     return new Observable<Weather>();
   }
 }

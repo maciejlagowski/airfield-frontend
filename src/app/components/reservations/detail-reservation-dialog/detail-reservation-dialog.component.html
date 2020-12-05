@@ -1,6 +1,12 @@
-<p>detail-reservation-dialog works!</p>
-{{reservation.reservationType}}
-<button (click)="acceptReservation();" *ngIf="reservation.status === 'NEW'">ACCEPT</button>
-<button (click)="rejectReservation();" *ngIf="reservation.status === 'NEW'">REJECT</button>
-
-
+<div class="m-3 h3">
+  <p class="h1">{{reservation.name}}</p>
+  <p> Date: {{reservation.date}}</p>
+  <p> Time: {{reservation.startTime.substring(0, 5)}} - {{ reservation.endTime.substring(0, 5) }}</p>
+  <p> Status: {{reservation.status | titlecase}}</p>
+  <p> Phone: {{reservation.telephone}}</p>
+  <p> Type: {{reservation.reservationType | titlecase}}</p>
+  <p *ngIf="reservation.status === 'NEW'">
+    <button (click)="acceptReservation();" class="btn btn-outline-success">ACCEPT</button> &nbsp;&nbsp;
+    <button (click)="rejectReservation();" class="btn btn-outline-danger">REJECT</button>
+  </p>
+</div>

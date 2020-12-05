@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Reservation} from '../../model/dto/reservation';
 import {ReservationService} from '../../services/reservation.service';
-import {User} from '../../model/dto/user';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DetailReservationDialogComponent} from './detail-reservation-dialog/detail-reservation-dialog.component';
 import {StaticToolsService} from '../../services/static-tools.service';
@@ -15,11 +14,8 @@ export class ReservationsComponent implements OnInit {
 
   reservations: Reservation[];
   date: string;
-  @Input()
-  loggedUser: User = new User();
 
   constructor(private reservationService: ReservationService, private modalService: NgbModal) {
-    this.loggedUser.isEmployee = true;
   }
 
   ngOnInit(): void {

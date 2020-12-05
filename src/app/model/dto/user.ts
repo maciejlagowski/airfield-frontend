@@ -4,5 +4,4 @@ export class User {
   password: string;
   email: string;
   phone: string;
-  isEmployee: boolean;
 }
