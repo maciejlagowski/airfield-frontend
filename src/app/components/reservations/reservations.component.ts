@@ -4,6 +4,8 @@ import {ReservationService} from '../../services/reservation.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DetailReservationDialogComponent} from './detail-reservation-dialog/detail-reservation-dialog.component';
 import {StaticToolsService} from '../../services/static-tools.service';
+import {NotificationService} from '../../services/notification.service';
+import {NotificationEnum} from '../../model/enum/notification.enum';
 
 @Component({
   selector: 'app-reservations',
@@ -15,7 +17,9 @@ export class ReservationsComponent implements OnInit {
   reservations: Reservation[];
   date: string;
 
-  constructor(private reservationService: ReservationService, private modalService: NgbModal) {
+  constructor(private reservationService: ReservationService,
+              private modalService: NgbModal,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -26,6 +30,7 @@ export class ReservationsComponent implements OnInit {
   updateReservations(): void {
     this.reservationService.findAll(this.date).subscribe(data => {
       this.reservations = data;
+      this.notificationService.removeNotification(NotificationEnum.SERVER_ERROR);
     });
   }
 
@@ -37,7 +42,6 @@ export class ReservationsComponent implements OnInit {
   }
 
   openDetails(reservation: Reservation): void {
-    // TODO user/employee verification
     const detailDialog = this.modalService.open(DetailReservationDialogComponent);
     detailDialog.componentInstance.reservation = reservation;
   }

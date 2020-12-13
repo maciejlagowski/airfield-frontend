@@ -1,0 +1,35 @@
+<div class="m-5">
+  <div *ngIf="!isUserLogged()">
+    <h1>Login</h1>
+    <form #f="ngForm" (ngSubmit)="f.form.valid && login()" name="form" novalidate>
+      <div [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+        <label>
+          <input #email="ngModel"
+                 [(ngModel)]="user.email" name="email"
+                 placeholder="Email"
+                 required
+                 type="text"/></label>
+        <div *ngIf="f.submitted
+          && !email.valid" class="alert alert-danger">Email is required
+        </div>
+      </div>
+      <div [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <label>
+          <input #password="ngModel"
+                 [(ngModel)]="user.password" name="password"
+                 placeholder="Password"
+                 required
+                 type="password"/></label>
+        <div *ngIf="f.submitted
+          && !password.valid" class="alert alert-danger">Password is required
+        </div>
+      </div>
+      <div>
+        <button class="btn-primary btn">Login</button>
+      </div>
+    </form>
+    <br/>
+    <app-user-register></app-user-register>
+  </div>
+  <button (click)="logout()" *ngIf="isUserLogged()" class="btn-primary btn">Logout</button>
+</div>

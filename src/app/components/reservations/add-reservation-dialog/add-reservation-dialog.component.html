@@ -24,7 +24,7 @@
       <div *ngIf="getTimeDifference() < 30 && getTimeDifference() >= 0" class="alert alert-danger">Time period cannot be
         less than 30 minutes
       </div>
-      <a href="/">Create new user?</a>
+        <app-user-register></app-user-register>
         <app-user-list (userEvent)="setUser($event)"></app-user-list>
       <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
       <div *ngIf="user === undefined" class="alert alert-danger">User is required</div>

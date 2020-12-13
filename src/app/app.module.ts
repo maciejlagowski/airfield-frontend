@@ -5,15 +5,15 @@ import {AppComponent} from './app.component';
 import {SidebarComponent} from './components/bars/sidebar/sidebar.component';
 import {HeadBarComponent} from './components/bars/headbar/head-bar.component';
 import {UserListComponent} from './components/user/user-list/user-list.component';
-import {UserFormComponent} from './components/user/user-form/user-form.component';
+import {UserRegisterComponent} from './components/user/user-register/user-register.component';
 import {AppRoutingModule} from './app-routing.module';
 import {UserService} from './services/user.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {ReservationsComponent} from './components/reservations/reservations.component';
 import {AddReservationDialogComponent} from './components/reservations/add-reservation-dialog/add-reservation-dialog.component';
-import {FilterPipe} from './pipes/filter.pipe';
-import {LoginComponent} from './components/login/login.component';
+import {UserFilterPipe} from './pipes/user-filter.pipe';
+import {UserLoginComponent} from './components/user/user-login/user-login.component';
 import {CommonModule, Location} from '@angular/common';
 import {DetailReservationDialogComponent} from './components/reservations/detail-reservation-dialog/detail-reservation-dialog.component';
 import {WeatherComponent} from './components/weather/weather.component';
@@ -29,11 +29,11 @@ import {NotificationsComponent} from './components/notifications/notifications.c
     SidebarComponent,
     HeadBarComponent,
     UserListComponent,
-    UserFormComponent,
+    UserRegisterComponent,
     ReservationsComponent,
     AddReservationDialogComponent,
-    FilterPipe,
-    LoginComponent,
+    UserFilterPipe,
+    UserLoginComponent,
     DetailReservationDialogComponent,
     WeatherComponent,
     WeatherWidgetComponent,

@@ -21,4 +21,16 @@ export class UserService {
   public save(user: User): Observable<User> {
     return this.http.post<User>(this.usersUrl, user);
   }
+
+  public register(user: User): Observable<User> {
+    return this.http.post<User>(this.usersUrl + '/register', user);
+  }
+
+  public getLoggedUser(): Observable<User> {
+    return this.http.get<User>(this.usersUrl + '/logged');
+  }
+
+  public update(user: User): Observable<User> {
+    return this.http.put<User>(this.usersUrl, user);
+  }
 }

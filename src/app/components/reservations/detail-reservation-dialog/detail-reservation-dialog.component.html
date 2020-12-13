@@ -5,7 +5,7 @@
   <p> Status: {{reservation.status | titlecase}}</p>
   <p> Phone: {{reservation.telephone}}</p>
   <p> Type: {{reservation.reservationType | titlecase}}</p>
-  <p *ngIf="reservation.status === 'NEW'">
+  <p *ngIf="reservation.status === 'NEW' && isUserEmployee()">
     <button (click)="acceptReservation();" class="btn btn-outline-success">ACCEPT</button> &nbsp;&nbsp;
     <button (click)="rejectReservation();" class="btn btn-outline-danger">REJECT</button>
   </p>

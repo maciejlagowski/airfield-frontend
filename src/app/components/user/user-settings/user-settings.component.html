@@ -1,1 +1,61 @@
-<p>user-settings works!</p>
+<div *ngIf="user === undefined" class="m-4 alert alert-danger">User not logged</div>
+<div *ngIf="user !== undefined" class="m-4">
+  <h1>{{user.email}}</h1><br/>
+  <h3>
+    <b>Name:</b> {{user.name}} <br/>
+    <b>Phone number:</b> {{user.phoneNumber}}
+  </h3>
+
+
+  <form *ngIf="passwordChange || nameChange || phoneChange">
+    <div *ngIf="nameChange" class="form-group">
+      <label for="name">Name</label>
+      <input #name="ngModel" [(ngModel)]="userChange.name"
+             class="form-control"
+             id="name"
+             name="name"
+             placeholder="Enter your name"
+             required type="text">
+      <div [hidden]="!name.pristine" class="alert alert-danger">Name is required</div>
+    </div>
+
+    <div *ngIf="passwordChange" class="form-group">
+      <label for="password">Password</label>
+      <input #password="ngModel" [(ngModel)]="userChange.password"
+             class="form-control"
+             id="password"
+             name="password"
+             placeholder="Enter your new password"
+             required type="password"/>
+      <div [hidden]="!password.pristine" class="alert alert-danger">Password is required</div>
+      <label for="password-rep">Password repeat</label>
+      <input #password_rep="ngModel" [(ngModel)]="passwordRep"
+             class="form-control"
+             id="password-rep"
+             name="password-rep"
+             placeholder="Repeat your password"
+             required type="password"/>
+      <div [hidden]="password.value === password_rep.value" class="alert alert-danger">Passwords aren't identical</div>
+    </div>
+
+    <div *ngIf="phoneChange" class="form-group">
+      <label for="phone">Phone number</label>
+      <input #phone="ngModel" [(ngModel)]="userChange.phoneNumber"
+             class="form-control"
+             id="phone"
+             name="phone"
+             placeholder="Enter your phone number"
+             required type="number">
+      <div [hidden]="!phone.pristine" class="alert alert-danger">Phone number is required</div>
+    </div>
+    <button (click)="update();" [disabled]="!isFormValid()"
+            class="btn btn-info" type="submit">Submit
+    </button>
+  </form>
+
+  <br/>
+  <button (click)="nameChange = !nameChange" class="btn btn-info">Change name</button>&nbsp;
+  <button (click)="phoneChange = !phoneChange" class="btn btn-info">Change phone number</button> &nbsp;
+  <button (click)="passwordChange = !passwordChange" class="btn btn-info">Change password</button>
+
+</div>

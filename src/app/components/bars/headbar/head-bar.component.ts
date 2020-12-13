@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Role} from '../../../model/enum/role.enum';
 import {JwtService} from '../../../services/jwt.service';
 
 @Component({
@@ -19,7 +18,7 @@ export class HeadBarComponent implements OnInit {
 
 
   isUserLogged(): boolean {
-    return this.jwtService.getUserRoleLogged() !== Role.ROLE_NOT_LOGGED;
+    return this.jwtService.isUserLogged();
   }
 
   logout(): void {

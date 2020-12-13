@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationEnum} from '../../model/enum/notification.enum';
-import {Role} from '../../model/enum/role.enum';
 import {NotificationService} from '../../services/notification.service';
+import {JwtService} from '../../services/jwt.service';
 
 @Component({
   selector: 'app-notifications',
@@ -10,7 +10,7 @@ import {NotificationService} from '../../services/notification.service';
 })
 export class NotificationsComponent implements OnInit {
 
-  constructor(private notificationService: NotificationService) {
+  constructor(private notificationService: NotificationService, private jwtService: JwtService) {
   }
 
   ngOnInit(): void {
@@ -25,8 +25,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   isUserNotLogged(): boolean {
-    const role = localStorage.getItem('USER_ROLE');
-    return role === null || Role[role] === Role.ROLE_NOT_LOGGED;
+    return !this.jwtService.isUserLogged();
   }
 
   removeNotification(notification: NotificationEnum): void {

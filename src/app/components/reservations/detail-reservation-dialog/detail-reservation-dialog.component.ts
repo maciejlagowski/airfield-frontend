@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Reservation} from '../../../model/dto/reservation';
 import {ReservationService} from '../../../services/reservation.service';
 import {Status} from '../../../model/enum/status.enum';
+import {JwtService} from '../../../services/jwt.service';
 
 @Component({
   selector: 'app-detail-reservation-dialog',
@@ -13,7 +14,7 @@ export class DetailReservationDialogComponent implements OnInit {
   @Input()
   reservation: Reservation;
 
-  constructor(private reservationService: ReservationService) {
+  constructor(private reservationService: ReservationService, private jwtService: JwtService) {
   }
 
   ngOnInit(): void {
@@ -32,4 +33,7 @@ export class DetailReservationDialogComponent implements OnInit {
     location.reload();
   }
 
+  isUserEmployee(): boolean {
+    return this.jwtService.isUserEmployee();
+  }
 }

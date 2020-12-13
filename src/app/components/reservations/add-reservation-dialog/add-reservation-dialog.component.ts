@@ -18,7 +18,6 @@ export class AddReservationDialogComponent implements OnInit {
   reservations: Reservation[];
   @Input()
   date: string;
-  isNewUser: boolean;
   user: User;
   reservationTypes: string[] = Object.keys(ReservationType);
   reservationType: ReservationType;
@@ -46,7 +45,7 @@ export class AddReservationDialogComponent implements OnInit {
 
   isHoursConflictExists(): boolean {
     for (const reservation of this.reservations) {
-      if (this.reservation.collides(reservation)) {
+      if (reservation.status === Status.ACCEPTED && this.reservation.collides(reservation)) {
         return true;
       }
     }
@@ -67,5 +66,9 @@ export class AddReservationDialogComponent implements OnInit {
 
   setUser(user: User): void {
     this.user = user;
+  }
+
+  isReservationInThePast(): boolean {
+    return false; // TODO
   }
 }

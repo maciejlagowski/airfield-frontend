@@ -2,9 +2,9 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {User} from '../model/dto/user';
 
 @Pipe({
-  name: 'filter'
+  name: 'userFilter'
 })
-export class FilterPipe implements PipeTransform {
+export class UserFilterPipe implements PipeTransform {
   transform(items: User[], searchText: string): any[] {
     if (!items) {
       return [];

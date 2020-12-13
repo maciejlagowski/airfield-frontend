@@ -8,7 +8,9 @@
   {{weather.sunrise.substring(11, 16)}} <br/>
   <img alt="Sunset" height="32" src="assets/img/moon.svg" width="32"/>
   {{weather.sunset.substring(11, 16)}} <br/>
-  <app-weather-widget></app-weather-widget>
+  <img alt="Temp" height="32" src="assets/img/thermometer.svg" width="32"/>
+  {{weather.dayTemp}}°C
+
 
   <br/><br/>
   <h3>Detailed weather:</h3>
@@ -25,28 +27,30 @@
     <tbody>
     <tr>
       <th scope="row">Temperature</th>
-      <td>{{ weather.morningTemp }} </td>
-      <td>{{ weather.dayTemp }} </td>
-      <td>{{ weather.eveningTemp }} </td>
-      <td>{{ weather.nightTemp }} </td>
+      <td>{{ weather.morningTemp }}°C</td>
+      <td>{{ weather.dayTemp }}°C</td>
+      <td>{{ weather.eveningTemp }}°C</td>
+      <td>{{ weather.nightTemp }}°C</td>
     </tr>
     <tr>
       <th scope="row">Temperature feels like</th>
-      <td>{{ weather.feelsLikeMorningTemp }} </td>
-      <td>{{ weather.feelsLikeDayTemp }} </td>
-      <td>{{ weather.feelsLikeEveningTemp }} </td>
-      <td>{{ weather.feelsLikeNightTemp }} </td>
+      <td>{{ weather.feelsLikeMorningTemp }}°C</td>
+      <td>{{ weather.feelsLikeDayTemp }}°C</td>
+      <td>{{ weather.feelsLikeEveningTemp }}°C</td>
+      <td>{{ weather.feelsLikeNightTemp }}°C</td>
     </tr>
     </tbody>
   </table>
 
-  Minimal temperature {{ weather.minTemp }} <br/>
-  Maximal temperature {{ weather.maxTemp }} <br/>
+  Minimal temperature {{ weather.minTemp }}°C <br/>
+  Maximal temperature {{ weather.maxTemp }}°C <br/>
   Pressure {{ weather.pressure }} hPa <br/>
-  Humidity {{ weather.humidity }} <br/>
-  Wind speed {{ weather.windSpeed }} <br/>
-  Wind degree {{ weather.windDeg }} <br/>
-  Clouds {{ weather.clouds }} <br/>
-  Pop {{ weather.pop }} <br/>
+  Humidity {{ weather.humidity }}% <br/>
+  Wind speed {{ weather.windSpeed }}m/s <br/>
+  Wind degree {{ weather.windDeg }}°
+  <img alt="Wind direction" height="20" src="assets/img/arrow-up.svg" style="transform: rotate({{weather.windDeg}}deg);"
+       width="20"/> <br/>
+  Clouds {{ weather.clouds }}% <br/>
+  Probability of precipitation {{ weather.pop }}% <br/>
 
 </div>
