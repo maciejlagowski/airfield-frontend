@@ -5,6 +5,7 @@ import {UserService} from '../../../services/user.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NotificationService} from '../../../services/notification.service';
 import {NotificationEnum} from '../../../model/enum/notification.enum';
+import {StaticToolsService} from '../../../services/static-tools.service';
 
 @Component({
   selector: 'app-user-register',
@@ -23,6 +24,8 @@ export class UserRegisterComponent {
     private notificationService: NotificationService
   ) {
     this.user = new User();
+    this.user.email = '';
+    this.user.phoneNumber = '';
   }
 
   open(content): void {
@@ -30,9 +33,16 @@ export class UserRegisterComponent {
   }
 
   onSubmit(): void {
-    // TODO validation email and phone
     this.userService.register(this.user).subscribe(result => {
-      this.notificationService.addNotification(NotificationEnum.OK_NOTIFICATION, 'User registered successfully.');
+      this.notificationService.addNotification(NotificationEnum.OK_NOTIFICATION, 'User registered successfully. Please activate via email');
     });
+  }
+
+  isPhoneNumberValid(): boolean {
+    return StaticToolsService.isPhoneNumberValid(String(this.user.phoneNumber));
+  }
+
+  isEmailValid(): boolean {
+    return StaticToolsService.isEmailValid(this.user.email);
   }
 }

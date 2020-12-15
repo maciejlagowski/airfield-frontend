@@ -1,7 +1,7 @@
 <div class="m-5">
   <div *ngIf="!isUserLogged()">
     <h1>Login</h1>
-    <form #f="ngForm" (ngSubmit)="f.form.valid && login()" name="form" novalidate>
+    <form #f="ngForm" name="form">
       <div [ngClass]="{ 'has-error': f.submitted && !email.valid }">
         <label>
           <input #email="ngModel"
@@ -13,7 +13,7 @@
           && !email.valid" class="alert alert-danger">Email is required
         </div>
       </div>
-      <div [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+      <div *ngIf="!passwordReset" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
         <label>
           <input #password="ngModel"
                  [(ngModel)]="user.password" name="password"
@@ -24,8 +24,12 @@
           && !password.valid" class="alert alert-danger">Password is required
         </div>
       </div>
-      <div>
-        <button class="btn-primary btn">Login</button>
+      <div *ngIf="!passwordReset">
+        <a (click)="passwordReset = !passwordReset" [routerLink]="">Forgot password?</a> <br/>
+        <button (click)="login()" [disabled]="!f.form.valid" class="btn-primary btn">Login</button>
+      </div>
+      <div *ngIf="passwordReset">
+        <button (click)="resetPassword()" [disabled]="!isEmailValid()" class="btn-primary btn">Reset password</button>
       </div>
     </form>
     <br/>

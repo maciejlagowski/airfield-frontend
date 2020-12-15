@@ -10,6 +10,9 @@
       <li class="active">
         <a class="nav-link text-light h4" routerLink="/weather">Weather</a>
       </li>
+      <li *ngIf="isUserEmployee()" class="active">
+        <a class="nav-link text-light h4" routerLink="/email">Email</a>
+      </li>
       <li class="active">
         <a class="nav-link text-light h4" routerLink="/user">User settings</a>
       </li>

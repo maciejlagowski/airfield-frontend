@@ -42,7 +42,7 @@ export class UserSettingsComponent implements OnInit {
     if (this.nameChange && this.userChange.name === '') {
       return false;
     }
-    if (this.phoneChange && this.userChange.phoneNumber === '') {
+    if (this.phoneChange && !this.isPhoneNumberValid()) {
       return false;
     }
     if (this.passwordChange) {
@@ -51,5 +51,9 @@ export class UserSettingsComponent implements OnInit {
       }
     }
     return (this.passwordChange || this.phoneChange || this.nameChange);
+  }
+
+  isPhoneNumberValid(): boolean {
+    return StaticToolsService.isPhoneNumberValid(String(this.user.phoneNumber));
   }
 }

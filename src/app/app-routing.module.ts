@@ -4,6 +4,7 @@ import {ReservationsComponent} from './components/reservations/reservations.comp
 import {UserLoginComponent} from './components/user/user-login/user-login.component';
 import {WeatherComponent} from './components/weather/weather.component';
 import {UserSettingsComponent} from './components/user/user-settings/user-settings.component';
+import {EmailComponent} from './components/email/email.component';
 
 const routes: Routes = [
   {path: '', component: ReservationsComponent},
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: 'weather', component: WeatherComponent},
   {path: 'reservations', component: ReservationsComponent},
   {path: 'user', component: UserSettingsComponent},
+  {path: 'email', component: EmailComponent},
   {path: '**', redirectTo: ''}
 ];
 

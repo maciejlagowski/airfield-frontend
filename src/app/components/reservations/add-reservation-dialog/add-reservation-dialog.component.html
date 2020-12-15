@@ -24,10 +24,13 @@
       <div *ngIf="getTimeDifference() < 30 && getTimeDifference() >= 0" class="alert alert-danger">Time period cannot be
         less than 30 minutes
       </div>
+      <div *ngIf="isReservationInThePast()" class="alert alert-danger">Reservation cannot be in the past</div>
+      <div *ngIf="isUserEmployee()">
         <app-user-register></app-user-register>
         <app-user-list (userEvent)="setUser($event)"></app-user-list>
-      <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
-      <div *ngIf="user === undefined" class="alert alert-danger">User is required</div>
+        <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
+        <div *ngIf="user === undefined" class="alert alert-danger">User is required</div>
+      </div>
       <div class="form-group">
         <label> Type of reservation
           <select [(ngModel)]="reservationType" name="reservationType">
@@ -39,8 +42,9 @@
       <button type="submit"
               [disabled]="!reservationForm.form.valid || isHoursConflictExists() ||
                (getTimeDifference() < 30 && getTimeDifference() > 0) ||
-               (user === undefined) ||
-               (reservationType === undefined)"
+               (isUserEmployee() && user === undefined) ||
+               (reservationType === undefined) ||
+                isReservationInThePast()"
               class="btn btn-info" (click)="onSubmit();modal.close('Save click')">Submit
       </button>
     </form>

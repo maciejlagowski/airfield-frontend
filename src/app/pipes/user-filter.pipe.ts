@@ -6,11 +6,8 @@ import {User} from '../model/dto/user';
 })
 export class UserFilterPipe implements PipeTransform {
   transform(items: User[], searchText: string): any[] {
-    if (!items) {
+    if (!items || !searchText) {
       return [];
-    }
-    if (!searchText) {
-      return items;
     }
     searchText = searchText.toLowerCase();
     return items.filter(it => {

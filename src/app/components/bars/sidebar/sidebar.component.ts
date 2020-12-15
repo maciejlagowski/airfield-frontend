@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {JwtService} from '../../../services/jwt.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,8 +8,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private jwtService: JwtService) {
+  }
 
   ngOnInit(): void {
+  }
+
+  isUserEmployee(): boolean {
+    return this.jwtService.isUserEmployee();
   }
 }

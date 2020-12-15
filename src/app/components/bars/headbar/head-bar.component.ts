@@ -23,5 +23,6 @@ export class HeadBarComponent implements OnInit {
 
   logout(): void {
     this.jwtService.logout();
+    location.reload();
   }
 }

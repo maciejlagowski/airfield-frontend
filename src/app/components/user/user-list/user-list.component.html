@@ -15,7 +15,7 @@
       <tr (click)="selectUser(user)" *ngFor="let user of users | userFilter : searchText">
         <td>{{ user.id }}</td>
         <td>{{ user.name }}</td>
-        <td><a href="tel:{{user.phone}}">{{user.phone}}</a></td>
+        <td><a href="tel:{{user.phoneNumber}}">{{user.phoneNumber}}</a></td>
       </tr>
       </tbody>
     </table>

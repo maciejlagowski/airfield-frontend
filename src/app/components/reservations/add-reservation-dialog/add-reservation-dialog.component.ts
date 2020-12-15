@@ -5,6 +5,7 @@ import {Reservation} from '../../../model/dto/reservation';
 import {User} from '../../../model/dto/user';
 import {ReservationType} from '../../../model/enum/reservation-type.enum';
 import {Status} from '../../../model/enum/status.enum';
+import {JwtService} from '../../../services/jwt.service';
 
 @Component({
   selector: 'app-add-reservation-dialog',
@@ -22,7 +23,7 @@ export class AddReservationDialogComponent implements OnInit {
   reservationTypes: string[] = Object.keys(ReservationType);
   reservationType: ReservationType;
 
-  constructor(private modalService: NgbModal, private reservationService: ReservationService) {
+  constructor(private modalService: NgbModal, private reservationService: ReservationService, private jwtService: JwtService) {
     this.reservation = new Reservation();
     this.reservation.status = Status.NEW;
   }
@@ -37,8 +38,9 @@ export class AddReservationDialogComponent implements OnInit {
   onSubmit(): void {
     this.reservation.date = this.date;
     this.reservation.reservationType = this.reservationType;
-    // this.user = this.loggedUser; TODO logged user automatically gets his reservation
-    this.reservation.userId = this.user.id;
+    if (this.isUserEmployee()) {
+      this.reservation.userId = this.user.id;
+    }
     this.reservationService.save(this.reservation).subscribe();
     location.reload();
   }
@@ -69,6 +71,10 @@ export class AddReservationDialogComponent implements OnInit {
   }
 
   isReservationInThePast(): boolean {
-    return false; // TODO
+    return (this.reservation.startTime < (new Date().getHours().toString() + ':' + new Date().getMinutes().toString()));
+  }
+
+  isUserEmployee(): boolean {
+    return this.jwtService.isUserEmployee();
   }
 }

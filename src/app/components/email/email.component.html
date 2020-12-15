@@ -1,0 +1,22 @@
+<div class="m-3">
+  <h3>Send mail to user</h3>
+  <form #emailForm="ngForm">
+    <app-user-list (userEvent)="setUser($event)"></app-user-list>
+    <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
+    <div *ngIf="user === undefined" class="alert alert-danger">User is required</div>
+
+    <div class="form-group">
+      <label for="subject">Subject:</label>
+      <input [(ngModel)]="email.subject" class="form-control" id="subject" name="subject"
+             placeholder="Subject" required type="text"/>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Text:</label>
+      <textarea [(ngModel)]="email.text" class="form-control" id="message" name="message" rows="4"></textarea>
+    </div>
+    <button (click)="sendMail();" [disabled]="!emailForm.form.valid || user === undefined" class="btn btn-info"
+            type="submit">Send mail
+    </button>
+  </form>
+</div>
