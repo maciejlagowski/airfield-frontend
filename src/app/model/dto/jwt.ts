@@ -4,4 +4,5 @@ export class Jwt {
   token: string;
   expirationTime: string;
   role: Role;
+  name: string;
 }

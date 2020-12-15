@@ -8,7 +8,7 @@ import {JwtService} from '../../../services/jwt.service';
 })
 export class HeadBarComponent implements OnInit {
 
-  username = 'sdf'; // TODO
+  username = '';
 
   constructor(private jwtService: JwtService) {
   }
@@ -16,8 +16,8 @@ export class HeadBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   isUserLogged(): boolean {
+    this.username = localStorage.getItem('USER_NAME');
     return this.jwtService.isUserLogged();
   }
 

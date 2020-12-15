@@ -23,7 +23,10 @@ export class UserSettingsComponent implements OnInit {
   emailConfirm = '';
 
 
-  constructor(private userService: UserService, private notificationService: NotificationService, private modalService: NgbModal, private jwtService: JwtService) {
+  constructor(private userService: UserService,
+              private notificationService: NotificationService,
+              private modalService: NgbModal,
+              private jwtService: JwtService) {
   }
 
   ngOnInit(): void {

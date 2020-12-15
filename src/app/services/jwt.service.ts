@@ -22,6 +22,7 @@ export class JwtService {
       localStorage.setItem('LOGIN_TOKEN', data.token);
       localStorage.setItem('JWT_EXP_TIME', data.expirationTime);
       localStorage.setItem('USER_ROLE', data.role);
+      localStorage.setItem('USER_NAME', data.name);
       this.gotoReservations();
     });
     this.notificationService.removeNotification(NotificationEnum.NOT_LOGGED_ERROR);

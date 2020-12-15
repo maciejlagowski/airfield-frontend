@@ -1,7 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <h4 class="text-light">Airfield</h4> &nbsp;&nbsp;&nbsp;
   <div class="collapse navbar-collapse">
-    <div class="text-light mr-auto">
+    <div class="mr-auto"></div>
+    <app-weather-widget class="text-light m-2"></app-weather-widget> &nbsp;&nbsp;&nbsp;
+    <div class="text-light">
       <h5 *ngIf="isUserLogged()">Welcome back <a routerLink="/user">{{username}}</a>.
         <button (click)="logout()" class="btn btn-info">Logout</button>
       </h5>
@@ -9,13 +11,11 @@
         <button class="btn-info btn" routerLink="/login">Log in</button>
       </h5>
     </div>
-    <app-weather-widget class="text-light m-2"></app-weather-widget>
-    <form class="form-inline my-2 my-lg-0">
-      <label>
-        <input class="form-control mr-sm-2" placeholder="Search" type="search">
-      </label>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <!--  TODO  <form class="form-inline my-2 my-lg-0">-->
+    <!--      <label>-->
+    <!--        <input class="form-control mr-sm-2" placeholder="Search" type="search">-->
+    <!--      </label>-->
+    <!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+    <!--    </form>-->
   </div>
 </nav>
-

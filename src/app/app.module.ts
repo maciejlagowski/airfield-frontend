@@ -23,6 +23,9 @@ import {UserSettingsComponent} from './components/user/user-settings/user-settin
 import {ErrorHandlerInterceptor} from './interceptors/error-handler.interceptor';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {EmailComponent} from './components/email/email.component';
+import {LoaderComponent} from './components/loader/loader.component';
+import {LoaderInterceptor} from './interceptors/loader.interceptor';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -40,18 +43,21 @@ import {EmailComponent} from './components/email/email.component';
     WeatherWidgetComponent,
     UserSettingsComponent,
     NotificationsComponent,
-    EmailComponent
+    EmailComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    OverlayModule
   ],
   providers: [UserService, Location,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true}],
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
