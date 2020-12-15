@@ -56,6 +56,23 @@
   <br/>
   <button (click)="nameChange = !nameChange" class="btn btn-info">Change name</button>&nbsp;
   <button (click)="phoneChange = !phoneChange" class="btn btn-info">Change phone number</button> &nbsp;
-  <button (click)="passwordChange = !passwordChange" class="btn btn-info">Change password</button>
+  <button (click)="passwordChange = !passwordChange" class="btn btn-info">Change password</button>&nbsp;
+  <button (click)="open(remove)" *ngIf="!isUserEmployee()" class="btn btn-danger">Remove account</button>
 
 </div>
+
+<ng-template #remove let-modal>
+  <div class="modal-body">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Deleting account</h4>
+      <button (click)="modal.dismiss()" aria-label="Close" class="close" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <br/>
+    <label>Enter your email to confirm
+      <input [(ngModel)]="emailConfirm" type="text"/></label>
+    <button (click)="deleteAccount()" [disabled]="emailConfirm !== user.email" class="btn btn-danger">Delete account
+    </button>
+  </div>
+</ng-template>

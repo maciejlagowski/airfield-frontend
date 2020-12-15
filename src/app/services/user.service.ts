@@ -43,4 +43,9 @@ export class UserService {
     const params = new HttpParams().set('email', email);
     return this.http.patch<User>(this.usersUrl + '/reset-password', {}, {params});
   }
+
+  delete(user: User): Observable<User> {
+    const params = new HttpParams().set('id', user.id);
+    return this.http.delete<User>(this.usersUrl, {params});
+  }
 }

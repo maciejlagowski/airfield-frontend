@@ -36,4 +36,20 @@ export class DetailReservationDialogComponent implements OnInit {
   isUserEmployee(): boolean {
     return this.jwtService.isUserEmployee();
   }
+
+  cancelReservation(): void {
+    this.updateStatus(Status.CANCELLED);
+  }
+
+  isReservationCancellable(): boolean {
+    if (this.reservation.status === Status.ACCEPTED || this.reservation.status === Status.NEW) {
+      if (this.isUserEmployee()) {
+        return this.reservation.status === Status.ACCEPTED;
+      } else {
+        return !this.reservation.name.includes('*');
+      }
+    } else {
+      return false;
+    }
+  }
 }

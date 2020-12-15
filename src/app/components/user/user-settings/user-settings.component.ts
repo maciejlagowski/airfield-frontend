@@ -4,6 +4,8 @@ import {User} from '../../../model/dto/user';
 import {NotificationService} from '../../../services/notification.service';
 import {NotificationEnum} from '../../../model/enum/notification.enum';
 import {StaticToolsService} from '../../../services/static-tools.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {JwtService} from '../../../services/jwt.service';
 
 @Component({
   selector: 'app-user-settings',
@@ -18,9 +20,10 @@ export class UserSettingsComponent implements OnInit {
   phoneChange = false;
   passwordChange = false;
   passwordRep = '';
+  emailConfirm = '';
 
 
-  constructor(private userService: UserService, private notificationService: NotificationService) {
+  constructor(private userService: UserService, private notificationService: NotificationService, private modalService: NgbModal, private jwtService: JwtService) {
   }
 
   ngOnInit(): void {
@@ -55,5 +58,22 @@ export class UserSettingsComponent implements OnInit {
 
   isPhoneNumberValid(): boolean {
     return StaticToolsService.isPhoneNumberValid(String(this.user.phoneNumber));
+  }
+
+  open(content): void {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+  }
+
+  deleteAccount(): void {
+    this.modalService.dismissAll();
+    this.userService.delete(this.user).subscribe(() => {
+      this.notificationService.removeNotification(NotificationEnum.SERVER_ERROR);
+      this.notificationService.addNotification(NotificationEnum.OK_NOTIFICATION, 'User account removed');
+      this.jwtService.logout();
+    });
+  }
+
+  isUserEmployee(): boolean {
+    return this.jwtService.isUserEmployee();
   }
 }

@@ -9,4 +9,7 @@
     <button (click)="acceptReservation();" class="btn btn-outline-success">ACCEPT</button> &nbsp;&nbsp;
     <button (click)="rejectReservation();" class="btn btn-outline-danger">REJECT</button>
   </p>
+  <p *ngIf="isReservationCancellable()">
+    <button (click)="cancelReservation();" class="btn btn-info">CANCEL</button>
+  </p>
 </div>
