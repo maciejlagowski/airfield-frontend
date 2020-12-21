@@ -1,10 +1,11 @@
 <div *ngIf="user === undefined" class="m-4 alert alert-danger">User not logged</div>
 <div *ngIf="user !== undefined" class="m-4">
   <h1>{{user.email}}</h1><br/>
-  <h3>
-    <b>Name:</b> {{user.name}} <br/>
-    <b>Phone number:</b> {{user.phoneNumber}}
-  </h3>
+  <div class="h3">
+    <p><b>Name:</b> {{user.name}}</p>
+    <p><b>Phone number:</b> {{user.phoneNumber}}</p>
+    <p *ngIf="adminPanel"><b>Role:</b> {{user.role}}</p>
+  </div>
 
 
   <form *ngIf="passwordChange || nameChange || phoneChange">
@@ -59,20 +60,45 @@
   <button (click)="passwordChange = !passwordChange" class="btn btn-info">Change password</button>&nbsp;
   <button (click)="open(remove)" *ngIf="!isUserEmployee()" class="btn btn-danger">Remove account</button>
 
+  <div *ngIf="adminPanel">
+    <br/>
+    <button (click)="open(remove)" class="btn btn-danger">Remove account</button>&nbsp;
+    <button (click)="open(role)" class="btn btn-warning">Change role</button>
+  </div>
+
 </div>
 
 <ng-template #remove let-modal>
   <div class="modal-body">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Deleting account</h4>
+      <h4 class="modal-title" id="modal-remove-title">Deleting account</h4>
       <button (click)="modal.dismiss()" aria-label="Close" class="close" type="button">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <br/>
-    <label>Enter your email to confirm
+    <label>Enter email to confirm
       <input [(ngModel)]="emailConfirm" type="text"/></label>
     <button (click)="deleteAccount()" [disabled]="emailConfirm !== user.email" class="btn btn-danger">Delete account
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #role let-modal>
+  <div class="modal-body">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-role-title">Changing role</h4>
+      <button (click)="modal.dismiss()" aria-label="Close" class="close" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <br/>
+    <label> User role
+      <select [(ngModel)]="userChange.role" name="reservationType">
+        <option *ngFor="let role of roles">{{role}}</option>
+      </select>
+    </label>
+    <button (click)="changeUserRole()" class="btn btn-warning">Change role
     </button>
   </div>
 </ng-template>

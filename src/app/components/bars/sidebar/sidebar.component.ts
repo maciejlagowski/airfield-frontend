@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {JwtService} from '../../../services/jwt.service';
+import {Role} from '../../../model/enum/role.enum';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,5 +17,10 @@ export class SidebarComponent implements OnInit {
 
   isUserEmployee(): boolean {
     return this.jwtService.isUserEmployee();
+  }
+
+  isUserAdmin(): boolean {
+    const role = this.jwtService.getUserRoleLogged();
+    return role === Role.ROLE_ADMIN;
   }
 }

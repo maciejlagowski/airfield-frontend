@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
 import {User} from '../../../model/dto/user';
 import {NotificationService} from '../../../services/notification.service';
@@ -6,6 +6,7 @@ import {NotificationEnum} from '../../../model/enum/notification.enum';
 import {StaticToolsService} from '../../../services/static-tools.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {JwtService} from '../../../services/jwt.service';
+import {Role} from '../../../model/enum/role.enum';
 
 @Component({
   selector: 'app-user-settings',
@@ -14,13 +15,19 @@ import {JwtService} from '../../../services/jwt.service';
 })
 export class UserSettingsComponent implements OnInit {
 
+  @Input()
   user: User;
+  @Input()
   userChange: User;
   nameChange = false;
   phoneChange = false;
   passwordChange = false;
   passwordRep = '';
   emailConfirm = '';
+  roles: string[] = Object.keys(Role);
+
+  @Input()
+  adminPanel = false;
 
 
   constructor(private userService: UserService,
@@ -30,10 +37,12 @@ export class UserSettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getLoggedUser().subscribe(data => {
-      this.user = data;
-      this.userChange = StaticToolsService.clone(data);
-    });
+    if (!this.adminPanel) {
+      this.userService.getLoggedUser().subscribe(data => {
+        this.user = data;
+        this.userChange = StaticToolsService.clone(data);
+      });
+    }
   }
 
   update(): void {
@@ -72,11 +81,22 @@ export class UserSettingsComponent implements OnInit {
     this.userService.delete(this.user).subscribe(() => {
       this.notificationService.removeNotification(NotificationEnum.SERVER_ERROR);
       this.notificationService.addNotification(NotificationEnum.OK_NOTIFICATION, 'User account removed');
-      this.jwtService.logout();
+      if (!this.adminPanel) {
+        this.jwtService.logout();
+      }
     });
   }
 
   isUserEmployee(): boolean {
     return this.jwtService.isUserEmployee();
+  }
+
+  changeUserRole(): void {
+    this.modalService.dismissAll();
+    this.userService.updateRole(this.userChange).subscribe(() => {
+      this.notificationService.removeNotification(NotificationEnum.SERVER_ERROR);
+      this.notificationService.addNotification(NotificationEnum.OK_NOTIFICATION, 'User role updated!');
+      this.user = StaticToolsService.clone(this.userChange);
+    });
   }
 }

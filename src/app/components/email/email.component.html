@@ -1,5 +1,5 @@
-<div class="m-3">
-  <h3>Send mail to user</h3>
+<div class="m-4">
+  <h1>Send mail to user</h1>
   <form #emailForm="ngForm">
     <app-user-list (userEvent)="setUser($event)"></app-user-list>
     <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>

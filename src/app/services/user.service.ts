@@ -14,24 +14,8 @@ export class UserService {
     this.usersUrl = 'http://localhost:8080/users';
   }
 
-  public findAll(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl + '/all');
-  }
-
   public save(user: User): Observable<User> {
     return this.http.post<User>(this.usersUrl, user);
-  }
-
-  public register(user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl + '/register', user);
-  }
-
-  public getLoggedUser(): Observable<User> {
-    return this.http.get<User>(this.usersUrl + '/logged');
-  }
-
-  public update(user: User): Observable<User> {
-    return this.http.put<User>(this.usersUrl, user);
   }
 
   public getUser(userId: string): Observable<User> {
@@ -39,13 +23,33 @@ export class UserService {
     return this.http.get<User>(this.usersUrl, {params});
   }
 
+  public update(user: User): Observable<User> {
+    return this.http.put<User>(this.usersUrl, user);
+  }
+
+  public updateRole(user: User): Observable<User> {
+    return this.http.patch<User>(this.usersUrl, user);
+  }
+
+  public delete(user: User): Observable<User> {
+    const params = new HttpParams().set('id', user.id);
+    return this.http.delete<User>(this.usersUrl, {params});
+  }
+
+  public register(user: User): Observable<User> {
+    return this.http.post<User>(this.usersUrl + '/register', user);
+  }
+
+  public findAll(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersUrl + '/all');
+  }
+
+  public getLoggedUser(): Observable<User> {
+    return this.http.get<User>(this.usersUrl + '/logged');
+  }
+
   public resetPassword(email: string): Observable<User> {
     const params = new HttpParams().set('email', email);
     return this.http.patch<User>(this.usersUrl + '/reset-password', {}, {params});
-  }
-
-  delete(user: User): Observable<User> {
-    const params = new HttpParams().set('id', user.id);
-    return this.http.delete<User>(this.usersUrl, {params});
   }
 }

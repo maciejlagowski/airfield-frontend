@@ -16,6 +16,9 @@
       <li class="active">
         <a class="nav-link text-light h4" routerLink="/user">User settings</a>
       </li>
+      <li *ngIf="isUserAdmin()" class="active">
+        <a class="nav-link text-light h4" routerLink="/admin">Admin panel</a>
+      </li>
     </ul>
   </nav>
 </div>

@@ -1,0 +1,12 @@
+<div *ngIf="isUserAdmin()" class="m-4">
+  <h1>Admin panel</h1>
+  <app-user-list (userEvent)="setUser($event)"></app-user-list>
+  <p *ngIf="user!==undefined">Selected user: {{user.name}}</p>
+  <app-user-register></app-user-register>
+
+  <app-user-settings *ngIf="userLoaded | async" [adminPanel]="true" [userChange]="userChange"
+                     [user]="user"></app-user-settings>
+</div>
+<div *ngIf="!isUserAdmin()" class="alert-danger alert">
+  User has no permission here
+</div>

@@ -26,6 +26,7 @@ import {EmailComponent} from './components/email/email.component';
 import {LoaderComponent} from './components/loader/loader.component';
 import {LoaderInterceptor} from './interceptors/loader.interceptor';
 import {OverlayModule} from '@angular/cdk/overlay';
+import {AdminPanelComponent} from './components/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
     UserSettingsComponent,
     NotificationsComponent,
     EmailComponent,
-    LoaderComponent
+    LoaderComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
