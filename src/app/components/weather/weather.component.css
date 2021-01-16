@@ -1,3 +1,31 @@
-div.alert-hover:hover {
-  background-color: #ffa8b3;
+div.YELLOW {
+  background-color: #ffff73;
+}
+
+div.YELLOW:hover {
+  background-color: #ffff00;
+}
+
+div.AMBER {
+  background-color: #ffa467;
+}
+
+div.AMBER:hover {
+  background-color: #ff5b36;
+}
+
+div.RED {
+  background-color: #ff6c67;
+}
+
+div.RED:hover {
+  background-color: #ff5c57;
+}
+
+div.UNKNOWN {
+  background-color: #a0a29a;
+}
+
+div.UNKNOWN:hover {
+  background-color: #5d5f58;
 }

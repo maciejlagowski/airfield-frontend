@@ -1,7 +1,8 @@
 <div class="m-4">
   <h1>Weather</h1> <br/>
   <div *ngIf="this.alerts !== undefined && alerts.length > 0">
-    <div (click)="openAlertDetails(alert)" *ngFor="let alert of this.alerts" class="alert alert-danger alert-hover">
+    <div (click)="openAlertDetails(alert)" *ngFor="let alert of this.alerts"
+         class="alert alert-danger {{alert.alertImpact}}">
       ALERT: {{alert.senderName}}: {{alert.event}}
     </div>
   </div>
