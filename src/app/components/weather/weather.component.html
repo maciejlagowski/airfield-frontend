@@ -1,7 +1,14 @@
-<div *ngIf="weatherLoaded | async" class="m-4">
-  <h1>Weather</h1> <label>
-  <input (change)="updateWeather()" [(ngModel)]="date" type="date"/>
-</label> <br/><br/>
+<div class="m-4">
+  <h1>Weather</h1> <br/>
+  <div *ngIf="this.alerts !== undefined && alerts.length > 0">
+    <div (click)="openAlertDetails(alert)" *ngFor="let alert of this.alerts" class="alert alert-danger alert-hover">
+      ALERT: {{alert.senderName}}: {{alert.event}}
+    </div>
+  </div>
+  <br/>
+  <label>
+    <input (change)="updateWeather()" [(ngModel)]="date" type="date"/>
+  </label> <br/><br/>
   <img alt="Main weather" height="32" src="assets/img/cloud.svg" width="32"/>
   {{weather.descriptionWeather}} <br/>
   <img alt="Sunrise" height="32" src="assets/img/sun.svg" width="32"/>

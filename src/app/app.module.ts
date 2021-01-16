@@ -27,6 +27,7 @@ import {LoaderComponent} from './components/loader/loader.component';
 import {LoaderInterceptor} from './interceptors/loader.interceptor';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {AdminPanelComponent} from './components/admin-panel/admin-panel.component';
+import {WeatherAlertDetailsComponent} from './components/weather/weather-alert-details/weather-alert-details.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {AdminPanelComponent} from './components/admin-panel/admin-panel.componen
     NotificationsComponent,
     EmailComponent,
     LoaderComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    WeatherAlertDetailsComponent
   ],
   imports: [
     BrowserModule,
