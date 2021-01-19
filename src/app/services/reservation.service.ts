@@ -16,8 +16,7 @@ export class ReservationService {
   }
 
   public findAll(date: string): Observable<Reservation[]> {
-    const params: HttpParams = new HttpParams().set('date', date);
-    return this.http.get<Reservation[]>(this.reservationsUrl, {params});
+    return this.http.get<Reservation[]>(this.reservationsUrl + '/' + date);
   }
 
   public save(reservation: Reservation): Observable<Reservation> {
@@ -25,7 +24,7 @@ export class ReservationService {
   }
 
   public updateStatus(id: string, status: Status): Observable<Reservation> {
-    const params: HttpParams = new HttpParams().set('id', id).set('status', status);
-    return this.http.patch<Reservation>(this.reservationsUrl, {}, {params});
+    const params: HttpParams = new HttpParams().set('status', status);
+    return this.http.patch<Reservation>(this.reservationsUrl + '/' + id + '/status', {}, {params});
   }
 }

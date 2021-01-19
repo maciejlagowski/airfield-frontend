@@ -41,7 +41,7 @@
       <div *ngIf="reservationType === undefined" class="alert alert-danger">Type of reservation is required</div>
       <button type="submit"
               [disabled]="!reservationForm.form.valid || isHoursConflictExists() ||
-               (getTimeDifference() < 30 && getTimeDifference() > 0) ||
+               (getTimeDifference() < 30 || getTimeDifference() < 0) ||
                (isUserEmployee() && user === undefined) ||
                (reservationType === undefined) ||
                 isReservationInThePast()"

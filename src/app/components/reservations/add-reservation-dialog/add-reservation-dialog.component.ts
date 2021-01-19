@@ -71,7 +71,15 @@ export class AddReservationDialogComponent implements OnInit {
   }
 
   isReservationInThePast(): boolean {
-    return (this.reservation.startTime < (new Date().getHours().toString() + ':' + new Date().getMinutes().toString()));
+    const today = new Date().getDate().toString();
+    const reservationDate = this.date.substr(8, 2);
+    if (today < reservationDate) {
+      return false;
+    } else if (today > reservationDate) {
+      return true;
+    } else {
+      return (this.reservation.startTime < (new Date().getHours().toString() + ':' + new Date().getMinutes().toString()));
+    }
   }
 
   isUserEmployee(): boolean {
